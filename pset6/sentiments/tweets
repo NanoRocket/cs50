@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+
+from twython import Twython
+from analyzer import Analyzer 
+import os
+import sys
+import helpers
+from nltk.tokenize import TweetTokenizer
+from termcolor import colored   # colorizes output in terminal windows
+
+def main():
+    
+    # ensure proper usage
+    if len(sys.argv) != 2:
+        sys.exit("Usage: ./smile word")
+    
+    # queries Twitter’s API for a user’s most recent 50 tweets
+    tweets = helpers.get_user_timeline(sys.argv[1], count = 50)
+    if tweets == None:
+        sys.exit("helpers didn't work")
+    
+    # absolute paths to lists
+    positives = os.path.join(sys.path[0], "positive-words.txt")
+    negatives = os.path.join(sys.path[0], "negative-words.txt")
+
+    # instantiate analyzer
+    analyzer = Analyzer(positives, negatives)
+    
+    # instantiate tweet tokenizer
+    tknzr = TweetTokenizer()
+
+    # analyzes the sentiment of each of those tweets
+    for tweet in tweets:
+        
+        tweet_token=tknzr.tokenize(tweet)
+        score = 0
+        
+        #get score of tweet
+        for word in tweet_token:
+            score += analyzer.analyze(word)
+        
+        # display score of the tweet
+        if score > 0.0:
+            print(str(score) +' ' + colored(tweet, "green"))
+        elif score < 0.0:
+            print(str(score) +' ' + colored(tweet, "red"))
+        else:
+            print(str(score) +' ' + colored(tweet, "yellow"))    
+    
+if __name__ == "__main__":
+    main()
+
+
