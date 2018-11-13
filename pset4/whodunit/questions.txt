@@ -1,0 +1,67 @@
+1.  What’s stdint.h?
+
+"stdint.h is a header file in the C standard library introduced in the C99 standard library section 7.18 to allow 
+programmers to write more portable code by providing a set of typedefs that specify exact-width integer types, 
+together with the defined minimum and maximum allowable values for each type, using macros ." https://en.wikibooks.org/wiki/C_Programming/C_Reference/stdint.h
+
+Basically this helps with portability between platforms, which (I'm guessing) allocate different amounts of bytes by default
+to common data types. I will get the number of bytes I ask for.
+
+
+2.  What’s the point of using uint8_t, uint32_t, int32_t, and uint16_t in a program?
+
+Makes it clear how many bytes I want for the integer.
+
+
+3.  How many bytes is a BYTE, a DWORD, a LONG, and a WORD, respectively?
+BYTE - 1. A BYTE is an 8-bit unsigned value that corresponds to a single octet in a network protocol.
+DWORD - 4. A DWORD is a 32-bit unsigned integer (range: 0 through 4294967295 decimal). Because a DWORD is unsigned, its first bit (Most Significant Bit (MSB)) is not reserved for signing.
+LONG -  4. A LONG is a 32-bit signed integer, in twos-complement format (range: –2147483648 through 2147483647 decimal). The first bit (Most Significant Bit (MSB)) is the signing bit.
+WORD - 2. A WORD is a 16-bit unsigned integer (range: 0 through 65535 decimal). Because a WORD is unsigned, its first bit (Most Significant Bit (MSB)) is not reserved for signing.
+
+
+4.  What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be? 
+    Leading bytes used to identify file formats (with high probability) are generally called "magic numbers."
+    
+In ASCII characters, it must be "BM"
+    
+5.  What’s the difference between bfSize and biSize?
+
+bfSize is the size, in bytes, of the bitmap file. biSize is the number of bytes required by the structure. bfSize includes the
+size of the header files.
+
+6.  What does it mean if biHeight is negative?
+
+If biHeight is negative, indicating a top-down DIB, biCompression must be either BI_RGB or BI_BITFIELDS. Top-down DIBs cannot be compressed.
+
+7.  What field in BITMAPINFOHEADER specifies the BMP’s color depth (i.e., bits per pixel)?
+
+biBitCount
+
+8.  Why might fopen return NULL in lines 24 and 32 of copy.c?
+
+If you do not have the correct permissions to read or write.
+
+9.  Why is the third argument to fread always 1 in our code?
+
+We are always reading a single struct
+
+10. What value does line 65 of copy.c assign to padding if bi.biWidth is 3
+
+3
+
+11. What does fseek do?
+
+Moves to a specific location inside the file. "The C library function int fseek(FILE *stream, long int offset, int whence) 
+sets the file position of the stream to the given offset."
+
+
+12. What is SEEK_CUR?
+
+int fseek(FILE *stream, long int offset, int whence)
+whence − This is the position from where offset is added. It is specified by one of the following constants −
+
+Constant	Description
+SEEK_SET	Beginning of file
+SEEK_CUR	Current position of the file pointer
+SEEK_END	End of file
