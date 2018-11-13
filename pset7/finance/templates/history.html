@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    HISTORY
+{% endblock %}
+
+{% block main %}
+    <h2>
+        User Cash, {{ usercash }}
+    </h2>
+    
+    <div class="container">
+      <h2>TRANSACTIONS</h2>
+      <p>A listing of Transactions</p>            
+      <table class="table table-striped">
+       
+        <thead>
+          <tr>
+            <th>Date of Transaction</th>
+            <th>Purchase or Sell</th>
+            <th>Stock Name</th>
+            <th>Stock Symbol</th>
+            <th>Shares Affected </th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        
+        {% set i = 0 %}
+        {% for row in stockinfo %}
+        <tbody>
+          <tr>
+            <td> {{ row.datetime }}</td>
+            <td> {{ row.purchase }}</td>
+            <td> {{ row.stock_name }}</td>
+            <td> {{ row.stock_symbol }}</td>
+            <td> {{ row.shares }}</td>
+            <td> {{ row.price }}</td>
+            </form>
+          </tr>
+          
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+
+</body>
+</html>
+{% endblock %}
+
+
+
+
+ 
+        
+
+
+
+

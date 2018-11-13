@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <h2>
+        User Cash, {{ usercash }}
+    </h2>
+    <h2>
+        User Value, {{ uservalue }}
+    </h2>
+    
+    <form action="{{ url_for('index') }}" method="post">
+        <fieldset>
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" name="add_cash" placeholder="Cash to Add" type="text"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" type="submit">ADD CASH!</button>
+            </div>
+        </fieldset>
+    </form>
+    
+    
+    <div class="container">
+      <h2>Stocks Owned</h2>
+      <p>A listing of stocks owned</p>            
+      <table class="table table-striped">
+       
+        <thead>
+          <tr>
+            <th>Stock Name</th>
+            <th>Stock Symbol</th>
+            <th>Shares Owned</th>
+            <th>Current Price</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        
+        {% for row in stockinfo %} 
+        <tbody>
+          <tr>
+            <td> {{ row.stock_name }}</td>
+            <td> {{ row.stock_symbol }}</td>
+            <td> {{ row.total_shares }}</td>
+            <td> {{ row.current_price }}</td>
+            <td> {{ row.total_value }}</td>
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+    
+{% endblock %}
+
+
+
+
+
+
+
+

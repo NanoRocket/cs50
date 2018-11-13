@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    SELL
+{% endblock %}
+
+{% block main %}
+    <h2>
+        User Cash, {{ usercash }}
+    </h2>
+    <h2>
+        User Value, {{ uservalue }}
+    </h2>
+    
+    <div class="container">
+      <h2>Stocks Owned</h2>
+      <p>A listing of stocks owned</p>            
+      <table class="table table-striped">
+       
+        <thead>
+          <tr>
+            <th>Date Purchased</th>
+            <th>Stock Name</th>
+            <th>Stock Symbol</th>
+            <th>Shares Owned</th>
+            <th>Current Price</th>
+            <th>Sell Amount</th>
+            <th>Sell Button</th>
+          </tr>
+        </thead>
+        
+        {% set i = 0 %}
+        {% for row in stockinfo %}
+        <tbody>
+          <tr>
+            <td> {{ row.date_purchased }}</td>
+            <td> {{ row.stock_name }}</td>
+            <td> {{ row.stock_symbol }}</td>
+            <td> {{ row.shares_owned }}</td>
+            <td> {{ row.current_price }}</td>
+            <form action="{{ url_for('sell') }}" method="post">
+              <fieldset>
+                <td> 
+                  <div class="form-group">
+                      <input autocomplete="off" autofocus class="form-control" name="sell_amount" placeholder=" " type="text"/>
+                  </div>
+                </td>
+                <td> 
+                  <div class="form-group">
+                      <button class="btn btn-default" type="submit">Sell</button>
+                  </div>
+                  <input type="hidden" customAttribute="My data" option value={{loop.index-1}} name="item_id"/>
+                </td>
+              </fieldset>
+            </form>
+          </tr>
+          
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+
+</body>
+</html>
+{% endblock %}
+
+
+
+
+ 
+        
+
+
+
+
