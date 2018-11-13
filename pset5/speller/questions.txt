@@ -1,0 +1,64 @@
+0.  What is pneumonoultramicroscopicsilicovolcanoconiosis?
+
+lung disease caused by silica dust. Or an organization pandering for relevance.
+
+--------------------------------------------------------------------------------------
+1.  According to its man page, what does getrusage do?
+
+int getrusage(int who, struct rusage *usage);
+getrusage() returns resource usage measures for who, which can be one of the following:
+
+--------------------------------------------------------------------------------------
+2.  Per that same man page, how many members are in a variable of type struct rusage?
+
+16
+
+
+--------------------------------------------------------------------------------------
+3.  Why do you think we pass before and after by reference (instead of by value) to 
+    calculate, even though we’re not changing their contents?
+
+It is much faster to pass large data structures by reference instead of by value
+
+--------------------------------------------------------------------------------------
+4.  Explain as precisely as possible, in a paragraph or more, how main goes 
+    about reading words from a file. In other words, convince us that you indeed
+    understand how that function’s for loop works.
+
+We open the file and start with the first word of the text. We will move character by character
+until we reach the EOF marker. We then first check that there are only alphabetical 
+characters and apostrophes in the word (as long as apostrophe after 0). We add that
+character to the word. If index is larger than the largest word we know, we skip the remainder of that 
+string. If there are numbers in the word, we ignore that word. Else, we have found an entire word
+so we record that we have and check the spelling.
+
+
+
+--------------------------------------------------------------------------------------
+5.  Why do you think we used fgetc to read each word’s characters one at a time 
+    rather than use fscanf with a format string like "%s" to read whole words at a time? 
+    Put another way, what problems might arise by relying on fscanf alone?
+
+We could get punctuation included in the words if we read by string.
+
+--------------------------------------------------------------------------------------
+6.  Why do you think we declared the parameters for check and load as const 
+    (which means "constant")?
+
+That way when we interact with the file and dictionary, we can not change them. 
+FROM http://stackoverflow.com/questions/9834067/difference-between-char-and-const-char
+
+const char*
+is a mutable pointer to an immutable character/string. You cannot change the contents of the 
+location(s) this pointer points to. Also, compilers are required to give error messages when you try 
+to do so. For the same reason, conversion from const char * to char* is deprecated.
+
+char* const
+is an immutable pointer (it cannot point to anyother location) but the contents of location at 
+which it points are mutable.
+
+const char* const
+is an immutable pointer to an immutable character/string.
+
+char*
+is entirely permissive.
